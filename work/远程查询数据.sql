@@ -1,0 +1,4 @@
+SELECT * FROM dbo.CarSerial WHERE SerialID=1932
+
+
+SELECT * FROM dbo.P_OP_QRCode WHERE QR_CodeID=1684912 
