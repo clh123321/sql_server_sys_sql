@@ -17,4 +17,5 @@ cross apply sys.dm_exec_query_plan(plan_handle) qp
 
 ORDER BY cp.usecounts DESC
 
-
+--原因就在于加上OPTION(RECOMPILE)这个查询提示之后，不缓存SQL的执行计划缓存，没有了执行计划缓存，也就没得重用了
+select COUNT(1) from [TABLE] where CreateDate>'2016-6-1' and CreateDate<'2016-6-9' OPTION(RECOMPILE)
