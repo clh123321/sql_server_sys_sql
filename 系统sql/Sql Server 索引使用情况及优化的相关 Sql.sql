@@ -108,6 +108,26 @@ where object_id = stats.object_id and index_id = stats.index_id
 FROM sys.dm_db_index_usage_stats as stats
 WHERE database_id = DB_ID()
 order by table_name
+--字段说明
+SELECT 
+	OBJECT_NAME(a.object_id)	AS [表或视图名称],
+	b.name						AS [索引名称], 
+	b.type_desc					AS [索引类型],
+	a.user_seeks				AS [索引查找次数],
+	a.user_updates				AS [索引更新次数],
+	a.user_scans				AS [索引扫描次数],
+	a.user_lookups				AS [索引书签查找次数],	
+	a.last_user_seek			AS [上次查找时间],
+	a.last_user_scan			AS [上次扫描时间],
+	a.last_user_lookup			AS [上次书签查找的时间],
+	a.last_user_update			AS [上次修改索引的时间]
+FROM sys.dm_db_index_usage_stats AS a -- 索引使用统计
+INNER JOIN sys.indexes AS b  -- 索引信息
+ON a.[OBJECT_ID] = b.[OBJECT_ID] and a.index_id = b.index_id
+INNER JOIN sys.objects AS c -- 对象信息
+ON a.[OBJECT_ID] = c.[OBJECT_ID] AND c.[type] IN('V','U')-- 表或视图
+WHERE a.database_id = DB_ID() AND a.index_id > 0 -- DB_ID()为当前库
+ORDER BY [表或视图名称],[索引类型];
 
 
 -- 指定表的索引使用情况
