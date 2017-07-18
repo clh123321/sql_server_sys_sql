@@ -1,4 +1,12 @@
-SELECT * FROM dbo.CarSerial WHERE SerialID=1932
+exec sp_addlinkedserver '169yichePeccancy', '', 'SQLOLEDB', '192.168.0.169\sql2008'
+exec sp_addlinkedsrvlogin '169yichePeccancy', 'false',null, 'sa', 'sa' 
 
 
-SELECT * FROM dbo.P_OP_QRCode WHERE QR_CodeID=1684912 
+--select * from [169yichePeccancy].数据库名.dbo.表名 
+
+--以后不再使用时删除链接服务器
+exec sp_dropserver 'ITSV ', 'droplogins' 
+
+
+
+--http://www.jb51.net/article/32278.htm
