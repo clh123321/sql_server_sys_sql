@@ -10,3 +10,4 @@ exec sp_dropserver 'ITSV ', 'droplogins'
 
 
 --http://www.jb51.net/article/32278.htm
+--http://www.cnblogs.com/kingsony/p/4013552.html
